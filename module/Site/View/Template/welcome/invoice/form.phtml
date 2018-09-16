@@ -11,9 +11,30 @@ use Krystal\Form\Element;
 <form class="form-horizontal">
   <fieldset class="col-lg-5">
     <div class="form-group">
-      <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
+      <label for="inputEmail" class="col-lg-2 control-label"><?php $this->show('Email'); ?></label>
       <div class="col-lg-10">
-        <?= Element::text('product', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Product name to be ordered')]); ?>
+        <?= Element::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => $this->translate('Type your email')]); ?>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPhone" class="col-lg-2 control-label"><?php $this->show('Phone'); ?></label>
+      <div class="col-lg-10">
+        <?= Element::text('phone', null, ['class' => 'form-control', 'id' => 'inputPhone', 'placeholder' => $this->translate('Type your phone')]); ?>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Your name'); ?></label>
+      <div class="col-lg-10">
+        <?= Element::text('client', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Type your name')]); ?>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputProduct" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
+      <div class="col-lg-10">
+        <?= Element::text('product', null, ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
       </div>
     </div>
     
