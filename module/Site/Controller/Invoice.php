@@ -130,6 +130,12 @@ final class Invoice extends AbstractSiteController
                 // Add now
                 $this->getModuleService('invoiceService')->add($data);
 
+                // Create email body
+                $body = $this->view->renderRaw('Site', 'mail', 'new', $data);
+
+                // Now send it
+                MailerService::send($_ENV['adminEmail'], 'Your have new invoice', $body);
+
                 $this->flashBag->set('success', 'Thanks! Your invoice has been sent');
                 return '1';
             } else {
