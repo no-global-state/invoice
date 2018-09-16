@@ -44,6 +44,9 @@ final class Module extends AbstractModule
             ),
             '/invoices' => [
                 'controller' => 'Invoice@indexAction'
+            ],
+            '/invoices/new' => [
+                'controller' => 'Invoice@newAction'
             ]
         );
     }
