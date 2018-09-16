@@ -4,6 +4,7 @@ namespace Site\Controller;
 
 use Krystal\Validate\Pattern;
 use Site\Gateway\GatewayService;
+use Site\Service\MailerService;
 
 final class Invoice extends AbstractSiteController
 {
@@ -83,7 +84,14 @@ final class Invoice extends AbstractSiteController
                 'link' => $this->request->getBaseUrl() . $this->createUrl('Site:Invoice@gatewayAction', [$invoice['token']])
             ]);
 
-            return $this->view->renderRaw('Site', 'mail', 'notify', $params);
+            // Create email body
+            $body = $this->view->renderRaw('Site', 'mail', 'notify', $params);
+
+            // Now send it
+            MailerService::send($invoice['email'], 'Please confirm payment', $body);
+
+            $this->flashBag->set('success', sprintf('Notification to %s has been successfully sent', $invoice['email']));
+            $this->response->redirectToPreviousPage();
 
         } else {
             // Invalid token
