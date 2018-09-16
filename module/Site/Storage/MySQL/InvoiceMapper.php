@@ -15,6 +15,14 @@ final class InvoiceMapper extends AbstractMapper
     }
 
     /**
+     * {@inheritDoc}
+     */
+    protected function getPk()
+    {
+        return 'id';
+    }
+
+    /**
      * Fetch all invoices
      * 
      * @return array
@@ -23,7 +31,7 @@ final class InvoiceMapper extends AbstractMapper
     {
         return $this->db->select('*')
                         ->from(self::getTableName())
-                        ->orderBy('id')
+                        ->orderBy($this->getPk())
                         ->queryAll();
     }
 }
