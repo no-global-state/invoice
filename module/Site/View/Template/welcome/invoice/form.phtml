@@ -1,0 +1,47 @@
+<?php
+
+use Krystal\Form\Element;
+
+?>
+
+<h2 class="page-header"><?php $this->show('Create new invoice'); ?></h2>
+
+<?php $this->loadPartial('breadcrumbs'); ?>
+
+<form class="form-horizontal">
+  <fieldset class="col-lg-5">
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
+      <div class="col-lg-10">
+        <?= Element::text('product', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Product name to be ordered')]); ?>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputAmount" class="col-lg-2 control-label"><?php $this->show('Amount'); ?></label>
+      <div class="col-lg-10">
+        <?= Element::number('amount', null, ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputCaptcha" class="col-lg-2 control-label"></label>
+        <div class="col-lg-10">
+            <a href="#" title="<?php $this->show('Click to refresh'); ?>" data-captcha="button-refresh"><img data-captcha="image" src="<?php echo $this->url('Site:Site@captchaAction', null); ?>" /></a>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputCaptcha" class="col-lg-2 control-label"></label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputCaptcha" name="captcha" placeholder="<?php $this->show("Prove that you are not a bot"); ?>" />
+        </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-10 pull-right">
+        <button type="submit" class="btn btn-success"><?php $this->show('Submit'); ?></button>
+      </div>
+    </div>
+  </fieldset>
+</form>
