@@ -44,6 +44,17 @@ final class InvoiceService
     }
 
     /**
+     * Confirms that payment is done by token
+     * 
+     * @param string $token
+     * @return boolean
+     */
+    public function confirmPayment(string $token) : bool
+    {
+        return $this->invoiceMapper->updateStatusByToken($token, 1);
+    }
+
+    /**
      * Finds row by its associated token
      * 
      * @param string $token
