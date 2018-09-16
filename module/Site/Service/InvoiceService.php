@@ -27,6 +27,17 @@ final class InvoiceService
     }
 
     /**
+     * Deletes invoice by its ID
+     * 
+     * @param int $id Invoice ID
+     * @return mixed
+     */
+    public function deleteById(int $id)
+    {
+        return $this->invoiceMapper->deleteByPk($id);
+    }
+
+    /**
      * Updates invoice
      * 
      * @param array $input

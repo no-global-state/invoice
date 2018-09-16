@@ -59,6 +59,9 @@ final class Module extends AbstractModule
             ],
             '/invoices/edit/(:var)' => [
                 'controller' => 'Invoice@editAction'
+            ],
+            '/invoices/delete/(:var)' => [
+                'controller' => 'Invoice@deleteAction'
             ]
         );
     }

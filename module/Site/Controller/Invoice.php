@@ -24,6 +24,20 @@ final class Invoice extends AbstractSiteController
     }
 
     /**
+     * Deletes invoice by its ID
+     * 
+     * @param int $id Invoice ID
+     * @return mixed
+     */
+    public function deleteAction(int $id)
+    {
+        $this->getModuleService('invoiceService')->deleteById($id);
+
+        $this->flashBag->set('success', 'Selected invoice has been successfully deleted');
+        $this->response->redirectToPreviousPage();
+    }
+
+    /**
      * Renders edit form
      * 
      * @param string $token

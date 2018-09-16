@@ -52,7 +52,11 @@ use Krystal\Form\Element;
 
         'edit' => function($row){
             return Element::icon('glyphicon glyphicon-pencil', $this->url('Site:Invoice@editAction', $row['token']), ['title' => 'Edit this invoice']);
+        },
+
+        'delete' => function($row){
+            return Element::icon('glyphicon glyphicon-trash', $this->url('Site:Invoice@deleteAction', $row['id']), ['title' => 'Delete this invoice']);
         }
     ]
-    
+
 ]); ?>
