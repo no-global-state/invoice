@@ -3,6 +3,8 @@
 namespace Site\Service;
 
 use Site\Storage\MySQL\InvoiceMapper;
+use Krystal\Text\TextUtils;
+use Krystal\Date\TimeHelper;
 
 final class InvoiceService
 {
@@ -22,6 +24,23 @@ final class InvoiceService
     public function __construct(InvoiceMapper $invoiceMapper)
     {
         $this->invoiceMapper = $invoiceMapper;
+    }
+
+    /**
+     * Adds new invoice
+     * 
+     * @param array $input
+     * @return boolean
+     */
+    public function add(array $input) : bool
+    {
+        return $this->invoiceMapper->persist([
+            'product' => $input['product'],
+            'amount' => $input['amount'],
+            'status' => -1,
+            'token' => TextUtils::uniqueString(),
+            'datetime' => TimeHelper::getNow()
+        ]);
     }
 
     /**
