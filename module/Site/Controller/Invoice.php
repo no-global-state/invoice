@@ -3,6 +3,7 @@
 namespace Site\Controller;
 
 use Krystal\Validate\Pattern;
+use Krystal\Stdlib\VirtualEntity;
 use Site\Gateway\GatewayService;
 use Site\Service\MailerService;
 
@@ -20,6 +21,37 @@ final class Invoice extends AbstractSiteController
         return $this->view->render('invoice/index', [
             'invoices' => $invoiceService->fetchAll()
         ]);
+    }
+
+    /**
+     * Renders edit form
+     * 
+     * @param string $token
+     * @return mixed
+     */
+    public function editAction(string $token)
+    {
+        // Grab the service
+        $invoiceService = $this->getModuleService('invoiceService');
+
+        if ($this->request->isGet()) {
+            $invoice = $invoiceService->findByToken($token);
+
+            if ($invoice) {
+                return $this->view->render('invoice/form', [
+                    'invoice' => $invoice
+                ]);
+            } else {
+                // Invalid token provided
+                return false;
+            }
+        } else {
+            // Update request
+            $invoiceService->update($this->request->getPost());
+
+            $this->flashBag->set('success', 'Invoice has been updated successfully');
+            return 1;
+        }
     }
 
     /**
@@ -107,7 +139,9 @@ final class Invoice extends AbstractSiteController
     public function newAction()
     {
         if ($this->request->isGet()) {
-            return $this->view->render('invoice/form');
+            return $this->view->render('invoice/form', [
+                'invoice' => new VirtualEntity()
+            ]);
 
         } else {
             $data = $this->request->getPost();

@@ -9,42 +9,45 @@ use Krystal\Form\Element;
 <?php $this->loadPartial('breadcrumbs'); ?>
 
 <form class="form-horizontal">
+  <?= Element::hidden('id', $invoice['id']); ?>
+
   <fieldset class="col-lg-5">
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label"><?php $this->show('Email'); ?></label>
       <div class="col-lg-10">
-        <?= Element::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => $this->translate('Type your email')]); ?>
+        <?= Element::text('email', $invoice['email'], ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => $this->translate('Type your email')]); ?>
       </div>
     </div>
 
     <div class="form-group">
       <label for="inputPhone" class="col-lg-2 control-label"><?php $this->show('Phone'); ?></label>
       <div class="col-lg-10">
-        <?= Element::text('phone', null, ['class' => 'form-control', 'id' => 'inputPhone', 'placeholder' => $this->translate('Type your phone')]); ?>
+        <?= Element::text('phone', $invoice['phone'], ['class' => 'form-control', 'id' => 'inputPhone', 'placeholder' => $this->translate('Type your phone')]); ?>
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Your name'); ?></label>
       <div class="col-lg-10">
-        <?= Element::text('client', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Type your name')]); ?>
+        <?= Element::text('client', $invoice['client'], ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Type your name')]); ?>
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputProduct" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
       <div class="col-lg-10">
-        <?= Element::text('product', null, ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
+        <?= Element::text('product', $invoice['product'], ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputAmount" class="col-lg-2 control-label"><?php $this->show('Amount'); ?></label>
       <div class="col-lg-10">
-        <?= Element::number('amount', null, ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
+        <?= Element::number('amount', $invoice['amount'], ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
       </div>
     </div>
 
+    <?php if (!is_array($invoice)): ?>
     <div class="form-group">
         <label for="inputCaptcha" class="col-lg-2 control-label"></label>
         <div class="col-lg-10">
@@ -58,6 +61,7 @@ use Krystal\Form\Element;
             <input type="text" class="form-control" id="inputCaptcha" name="captcha" placeholder="<?php $this->show("Prove that you are not a bot"); ?>" />
         </div>
     </div>
+    <?php endif; ?>
     
     <div class="form-group">
       <div class="col-lg-10 pull-right">
