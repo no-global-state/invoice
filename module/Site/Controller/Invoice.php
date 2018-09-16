@@ -3,6 +3,7 @@
 namespace Site\Controller;
 
 use Krystal\Validate\Pattern;
+use Site\Gateway\GatewayService;
 
 final class Invoice extends AbstractSiteController
 {
@@ -18,6 +19,52 @@ final class Invoice extends AbstractSiteController
         return $this->view->render('invoice/index', [
             'invoices' => $invoiceService->fetchAll()
         ]);
+    }
+
+    /**
+     * Handle success or failure after payment gets done
+     * 
+     * @param string $token
+     * @return mixed
+     */
+    public function successAction(string $token)
+    {
+        // Make sure they didn't press Cancel button
+        if (GatewayService::transactionFailed()) {
+            return $this->view->render('invoice/cancel');
+        }
+
+        $success = $this->getModuleService('invoiceService')->confirmPayment($token);
+
+        if ($success) {
+            return $this->view->render('invoice/success');
+        }
+    }
+
+    /**
+     * Invokes gateway by associated token
+     * 
+     * @param string $token
+     * @return mixed
+     */
+    public function gatewayAction(string $token)
+    {
+        // Find invoice by its token
+        $invoice = $this->getModuleService('invoiceService')->findByToken($token);
+
+        if ($invoice) {
+            // Create back URL
+            $backUrl = $this->createUrl('Site:Invoice@successAction', [$token]);
+            $gateway = GatewayService::factory($invoice['id'], $invoice['amount'], $backUrl);
+
+            return $this->view->disableLayout()->render('gateway', [
+                'gateway' => $gateway
+            ]);
+
+        } else {
+            // Invalid token
+            return false;
+        }
     }
 
     /**

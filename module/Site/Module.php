@@ -47,6 +47,12 @@ final class Module extends AbstractModule
             ],
             '/invoices/new' => [
                 'controller' => 'Invoice@newAction'
+            ],
+            '/invoices/gateway/(:var)' => [
+                'controller' => 'Invoice@gatewayAction'
+            ],
+            '/invoices/success/(:var)' => [
+                'controller' => 'Invoice@successAction'
             ]
         );
     }

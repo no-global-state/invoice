@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting... Please wait</title>
+</head>
+<body>
+    <form method="POST" action="<?= $gateway->getAction(); ?>">
+        <?= $gateway->renderFields(); ?>
+    </form>
+
+    <script>
+        // Get current form element
+        var form = document.getElementsByTagName('form');
+
+        // And submit immediately
+        form[0].submit();
+    </script>
+</body>
+</html>
