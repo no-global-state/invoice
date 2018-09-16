@@ -5,6 +5,7 @@ namespace Site;
 use Krystal\Application\Module\AbstractModule;
 use Site\Service\UserService;
 use Site\Storage\Memory\UserMapper;
+use Site\Service\InvoiceService;
 
 final class Module extends AbstractModule
 {
@@ -57,7 +58,8 @@ final class Module extends AbstractModule
         $authManager->setAuthService($userService);
 
         return array(
-            'userService' => $userService
+            'userService' => $userService,
+            'invoiceService' => new InvoiceService($this->createMapper('\Site\Storage\MySQL\InvoiceMapper'))
         );
     }
 }
