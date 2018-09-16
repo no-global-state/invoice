@@ -37,6 +37,9 @@ final class InvoiceService
         return $this->invoiceMapper->persist([
             'product' => $input['product'],
             'amount' => $input['amount'],
+            'email' => $input['email'],
+            'phone' => $input['phone'],
+            'client' => $input['client'],
             'status' => -1,
             'token' => TextUtils::uniqueString(),
             'datetime' => TimeHelper::getNow()
