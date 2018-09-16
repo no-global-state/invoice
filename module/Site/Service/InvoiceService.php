@@ -27,6 +27,17 @@ final class InvoiceService
     }
 
     /**
+     * Updates invoice
+     * 
+     * @param array $input
+     * @return boolean
+     */
+    public function update(array $input) : bool
+    {
+        return $this->invoiceMapper->persist($input);
+    }
+
+    /**
      * Adds new invoice
      * 
      * @param array $input
