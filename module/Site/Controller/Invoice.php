@@ -85,7 +85,10 @@ final class Invoice extends AbstractSiteController
                 'input' => [
                     'source' => $data,
                     'definition' => [
+                        'client' => new Pattern\Name(),
                         'product' => new Pattern\Name(),
+                        'email' => new Pattern\Email(),
+                        'phone' => new Pattern\Phone(),
                         'captcha' => new Pattern\Captcha($this->captcha)
                     ]
                 ]
