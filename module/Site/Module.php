@@ -41,7 +41,10 @@ final class Module extends AbstractModule
             ),
             '/register' => array(
                 'controller' => 'Register@indexAction'
-            )
+            ),
+            '/invoices' => [
+                'controller' => 'Invoice@indexAction'
+            ]
         );
     }
 

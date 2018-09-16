@@ -1,0 +1,35 @@
+<?php
+
+use Krystal\Grid\Grid;
+use Krystal\Form\Element;
+
+?>
+
+<h2 class="page-header"><?php $this->show('Invoices'); ?></h2>
+
+<?= Grid::render($invoices, [
+    // A column to be considered as a primary key
+    'pk' => 'id',
+    'batch' => false,
+    'columns' => [
+        [
+            'column' => 'id',
+            'label' => 'ID'
+        ],
+
+        [
+            'column' => 'product'
+        ],
+
+        [
+            'column' => 'status'
+        ],
+        
+        [
+            'column' => 'amount',
+            'value' => function($row){
+                return number_format($row['amount']);
+            }
+        ]
+    ]
+]); ?>
