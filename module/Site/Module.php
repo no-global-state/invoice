@@ -53,6 +53,9 @@ final class Module extends AbstractModule
             ],
             '/invoices/success/(:var)' => [
                 'controller' => 'Invoice@successAction'
+            ],
+            '/invoices/notify/(:var)' => [
+                'controller' => 'Invoice@notifyAction'
             ]
         );
     }

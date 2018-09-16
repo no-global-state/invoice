@@ -68,6 +68,30 @@ final class Invoice extends AbstractSiteController
     }
 
     /**
+     * Notify client about payment
+     * 
+     * @param string $token
+     * @return mixed
+     */
+    public function notifyAction(string $token)
+    {
+        // Find invoice by its token
+        $invoice = $this->getModuleService('invoiceService')->findByToken($token);
+
+        if ($invoice) {
+            $params = array_merge($invoice, [
+                'link' => $this->request->getBaseUrl() . $this->createUrl('Site:Invoice@gatewayAction', [$invoice['token']])
+            ]);
+
+            return $this->view->renderRaw('Site', 'mail', 'notify', $params);
+
+        } else {
+            // Invalid token
+            return false;
+        }
+    }
+
+    /**
      * Creates new invoice
      * 
      * @return string

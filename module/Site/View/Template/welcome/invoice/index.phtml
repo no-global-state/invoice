@@ -43,5 +43,12 @@ use Krystal\Form\Element;
                 return number_format($row['amount']);
             }
         ]
+    ],
+    
+    'actions' => [
+        'notify' => function($row){
+            return Element::icon('glyphicon glyphicon-cloud', $this->url('Site:Invoice@notifyAction', $row['token']), ['title' => 'Notify about payment']);
+        }
     ]
+    
 ]); ?>
