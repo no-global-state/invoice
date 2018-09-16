@@ -44,6 +44,17 @@ final class InvoiceService
     }
 
     /**
+     * Finds row by its associated token
+     * 
+     * @param string $token
+     * @return array
+     */
+    public function findByToken(string $token)
+    {
+        return $this->invoiceMapper->findByToken($token);
+    }
+
+    /**
      * Fetch all invoices
      * 
      * @return array

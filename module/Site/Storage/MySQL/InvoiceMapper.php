@@ -23,6 +23,17 @@ final class InvoiceMapper extends AbstractMapper
     }
 
     /**
+     * Finds row by its associated token
+     * 
+     * @param string $token
+     * @return array
+     */
+    public function findByToken(string $token)
+    {
+        return $this->fetchByColumn('token', $token);
+    }
+
+    /**
      * Fetch all invoices
      * 
      * @return array
