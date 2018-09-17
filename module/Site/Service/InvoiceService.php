@@ -27,6 +27,16 @@ final class InvoiceService
     }
 
     /**
+     * Returns pagination instance
+     * 
+     * @return \Krystal\Paginate\Paginator
+     */
+    public function getPaginator()
+    {
+        return $this->invoiceMapper->getPaginator();
+    }
+
+    /**
      * Deletes invoice by its ID
      * 
      * @param int $id Invoice ID
@@ -93,10 +103,12 @@ final class InvoiceService
     /**
      * Fetch all invoices
      * 
+     * @param int $page Current page number
+     * @param int $perPageCount Per page count
      * @return array
      */
-    public function fetchAll() : array
+    public function fetchAll(int $page, int $perPageCount) : array
     {
-        return $this->invoiceMapper->fetchAll();
+        return $this->invoiceMapper->fetchAll($page, $perPageCount);
     }
 }

@@ -10,14 +10,26 @@ final class Invoice extends AbstractSiteController
     /**
      * Render all invoices
      * 
+     * @param int $page Current page number
      * @return string
      */
-    public function indexAction()
+    public function indexAction($page)
     {
+        $perPageCount = 15;
+
+        if (!$page) {
+            $page = 1;
+        }
+
         $invoiceService = $this->getModuleService('invoiceService');
 
+        // Configure pagination instance
+        $paginator = $invoiceService->getPaginator();
+        $paginator->setUrl($this->createUrl('Site:Admin:Invoice@indexAction'));
+
         return $this->view->render('invoice/index', [
-            'invoices' => $invoiceService->fetchAll()
+            'invoices' => $invoiceService->fetchAll($page, $perPageCount),
+            'paginator' => $paginator
         ]);
     }
 

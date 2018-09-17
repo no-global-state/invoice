@@ -29,7 +29,7 @@ return [
         'controller' => 'Register@indexAction'
     ],
     
-    '/invoices' => [
+    '/invoices/(:var)' => [
         'controller' => 'Admin:Invoice@indexAction'
     ],
     

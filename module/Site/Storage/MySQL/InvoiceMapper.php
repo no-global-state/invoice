@@ -50,13 +50,17 @@ final class InvoiceMapper extends AbstractMapper
     /**
      * Fetch all invoices
      * 
+     * @param int $page Current page number
+     * @param int $perPageCount Per page count
      * @return array
      */
-    public function fetchAll() : array
+    public function fetchAll(int $page, int $perPageCount) : array
     {
         return $this->db->select('*')
                         ->from(self::getTableName())
                         ->orderBy($this->getPk())
+                        ->desc()
+                        ->paginate($page, $perPageCount)
                         ->queryAll();
     }
 }
