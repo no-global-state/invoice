@@ -3,9 +3,8 @@
 namespace Site\Controller\Admin;
 
 use Site\Service\MailerService;
-use Site\Controller\AbstractSiteController;
 
-final class Invoice extends AbstractSiteController
+final class Invoice extends AbstractAdminController
 {
     /**
      * Render all invoices
@@ -65,7 +64,7 @@ final class Invoice extends AbstractSiteController
                 // Append breadcrumb
                 $this->view->getBreadcrumbBag()->addOne('Invoices', $this->createUrl('Site:Admin:Invoice@indexAction', [1]))
                                                ->addOne('Edit invoice');
-                
+
                 return $this->view->render('invoice/form', [
                     'invoice' => $invoice
                 ]);
@@ -104,7 +103,7 @@ final class Invoice extends AbstractSiteController
             // Now send it
             MailerService::send($invoice['email'], 'Please confirm payment', $body);
 
-            $this->flashBag->set('success', sprintf('Notification to %s has been successfully sent', $invoice['email']));
+            $this->flashBag->set('success', $this->translator->translate('Notification to %s has been successfully sent', $invoice['email']));
             $this->response->redirectToPreviousPage();
 
         } else {
