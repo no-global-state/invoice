@@ -16,54 +16,7 @@ final class Module extends AbstractModule
      */
     public function getRoutes()
     {
-        return array(
-            '/site/captcha/(:var)' => array(
-                'controller' => 'Site@captchaAction'
-            ),
-
-            '/' => array(
-                'controller' => 'Site@indexAction'
-            ),
-
-            '/hello/(:var)' => array(
-                'controller' => 'Site@helloAction',
-            ),
-
-            '/contact' => array(
-                'controller' => 'Contact@indexAction'
-            ),
-            
-            '/auth/login' => array(
-                'controller' => 'Auth@indexAction'
-            ),
-            '/auth/logout' => array(
-                'controller' => 'Auth@logoutAction'
-            ),
-            '/register' => array(
-                'controller' => 'Register@indexAction'
-            ),
-            '/invoices' => [
-                'controller' => 'Invoice@indexAction'
-            ],
-            '/invoices/new' => [
-                'controller' => 'Invoice@newAction'
-            ],
-            '/invoices/gateway/(:var)' => [
-                'controller' => 'Invoice@gatewayAction'
-            ],
-            '/invoices/success/(:var)' => [
-                'controller' => 'Invoice@successAction'
-            ],
-            '/invoices/notify/(:var)' => [
-                'controller' => 'Invoice@notifyAction'
-            ],
-            '/invoices/edit/(:var)' => [
-                'controller' => 'Invoice@editAction'
-            ],
-            '/invoices/delete/(:var)' => [
-                'controller' => 'Invoice@deleteAction'
-            ]
-        );
+        return include(__DIR__ . '/Config/routes.php');
     }
 
     /**
