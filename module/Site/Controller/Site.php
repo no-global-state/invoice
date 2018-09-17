@@ -21,7 +21,7 @@ final class Site extends AbstractSiteController
      */
     public function indexAction()
     {
-        return $this->view->render('home');
+        return $this->response->redirect($this->createUrl('Site:Admin:Invoice@indexAction', [1]));
     }
 
     /**

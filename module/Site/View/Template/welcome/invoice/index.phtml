@@ -7,6 +7,8 @@ use Krystal\Form\Element;
 
 <h2 class="page-header"><?php $this->show('Invoices'); ?></h2>
 
+<?php $this->loadPartial('flash'); ?>
+
 <?= Grid::render($invoices, [
     // A column to be considered as a primary key
     'pk' => 'id',
@@ -55,7 +57,7 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-envelope', $this->url('Site:Admin:Invoice@notifyAction', $row['token']), ['title' => 'Notify client about payment']);
+            return Element::icon('glyphicon glyphicon-envelope', $this->url('Site:Admin:Invoice@notifyAction', $row['token']), ['title' => $this->translate('Notify client about payment')]);
         },
 
         'edit' => function($row){
@@ -63,7 +65,7 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-pencil', $this->url('Site:Admin:Invoice@editAction', $row['token']), ['title' => 'Edit this invoice']);
+            return Element::icon('glyphicon glyphicon-pencil', $this->url('Site:Admin:Invoice@editAction', $row['token']), ['title' => $this->translate('Edit this invoice')]);
         },
 
         'delete' => function($row){
@@ -71,10 +73,10 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-trash', $this->url('Site:Admin:Invoice@deleteAction', $row['id']), ['title' => 'Delete this invoice']);
+            return Element::icon('glyphicon glyphicon-trash', $this->url('Site:Admin:Invoice@deleteAction', $row['id']), ['title' => $this->translate('Delete this invoice')]);
         }
     ]
 
-]); ?>
+], $this->translator); ?>
 
 <?php $this->loadPartial('paginator'); ?>

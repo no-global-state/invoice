@@ -63,7 +63,7 @@ final class Auth extends AbstractSiteController
             'input' => array(
                 'source' => $this->request->getPost(),
                 'definition' => array(
-                    'email' => new Pattern\Email(),
+                    'login' => new Pattern\Login(),
                     'password' => new Pattern\Password()
                 )
             )
@@ -72,15 +72,15 @@ final class Auth extends AbstractSiteController
         if ($formValidator->isValid()) {
 
             // Grab request data
-            $email = $this->request->getPost('email');
+            $login = $this->request->getPost('login');
             $password = $this->request->getPost('password');
             $remember = (bool) $this->request->getPost('remember');
 
-            if ($this->getAuthService()->authenticate($email, $password, $remember)) {
+            if ($this->getAuthService()->authenticate($login, $password, $remember)) {
                 return '1';
             } else {
                 // Return raw string indicating failure
-                return $this->translator->translate('Invalid email or password');
+                return $this->translator->translate('Invalid login or password');
             }
         } else {
             return $formValidator->getErrors();
