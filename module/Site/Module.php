@@ -20,6 +20,14 @@ final class Module extends AbstractModule
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getTranslations($language)
+    {
+        return include(sprintf('%s/Translations/%s/messages.php', __DIR__, $language));
+    }
+
+    /**
      * Returns prepared service instances of this module
      * 
      * @return array
