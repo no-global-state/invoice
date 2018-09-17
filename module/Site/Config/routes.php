@@ -9,28 +9,12 @@ return [
         'controller' => 'Site@indexAction'
     ],
 
-    '/hello/(:var)' => [
-        'controller' => 'Site@helloAction',
-    ],
-
-    '/contact' => [
-        'controller' => 'Contact@indexAction'
-    ],
-    
     '/auth/login' => [
         'controller' => 'Auth@indexAction'
     ],
     
     '/auth/logout' => [
         'controller' => 'Auth@logoutAction'
-    ],
-    
-    '/register' => [
-        'controller' => 'Register@indexAction'
-    ],
-    
-    '/invoices/(:var)' => [
-        'controller' => 'Admin:Invoice@indexAction'
     ],
     
     '/invoices/new' => [
@@ -45,15 +29,19 @@ return [
         'controller' => 'Invoice@successAction'
     ],
     
-    '/invoices/notify/(:var)' => [
+    '/admin/invoices/(:var)' => [
+        'controller' => 'Admin:Invoice@indexAction'
+    ],
+    
+    '/admin/invoices/notify/(:var)' => [
         'controller' => 'Admin:Invoice@notifyAction'
     ],
     
-    '/invoices/edit/(:var)' => [
+    '/admin/invoices/edit/(:var)' => [
         'controller' => 'Admin:Invoice@editAction'
     ],
     
-    '/invoices/delete/(:var)' => [
+    '/admin/invoices/delete/(:var)' => [
         'controller' => 'Admin:Invoice@deleteAction'
     ]
 ];
