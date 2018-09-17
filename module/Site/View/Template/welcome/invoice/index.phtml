@@ -55,7 +55,7 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-envelope', $this->url('Site:Invoice@notifyAction', $row['token']), ['title' => 'Notify client about payment']);
+            return Element::icon('glyphicon glyphicon-envelope', $this->url('Site:Admin:Invoice@notifyAction', $row['token']), ['title' => 'Notify client about payment']);
         },
 
         'edit' => function($row){
@@ -63,7 +63,7 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-pencil', $this->url('Site:Invoice@editAction', $row['token']), ['title' => 'Edit this invoice']);
+            return Element::icon('glyphicon glyphicon-pencil', $this->url('Site:Admin:Invoice@editAction', $row['token']), ['title' => 'Edit this invoice']);
         },
 
         'delete' => function($row){
@@ -71,7 +71,7 @@ use Krystal\Form\Element;
                 return null;
             }
 
-            return Element::icon('glyphicon glyphicon-trash', $this->url('Site:Invoice@deleteAction', $row['id']), ['title' => 'Delete this invoice']);
+            return Element::icon('glyphicon glyphicon-trash', $this->url('Site:Admin:Invoice@deleteAction', $row['id']), ['title' => 'Delete this invoice']);
         }
     ]
 
