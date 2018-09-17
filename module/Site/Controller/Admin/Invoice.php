@@ -62,6 +62,10 @@ final class Invoice extends AbstractSiteController
             $invoice = $invoiceService->findByToken($token);
 
             if ($invoice) {
+                // Append breadcrumb
+                $this->view->getBreadcrumbBag()->addOne('Invoices', $this->createUrl('Site:Admin:Invoice@indexAction', [1]))
+                                               ->addOne('Edit invoice');
+                
                 return $this->view->render('invoice/form', [
                     'invoice' => $invoice
                 ]);
