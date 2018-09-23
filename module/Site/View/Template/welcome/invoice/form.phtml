@@ -40,13 +40,15 @@ use Krystal\Form\Element;
         <?= Element::text('product', $invoice['product'], ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
       </div>
     </div>
-    
+
+    <?php if ($invoice['amount'] !== false): ?>
     <div class="form-group">
       <label for="inputAmount" class="col-lg-2 control-label"><?php $this->show('Amount'); ?></label>
       <div class="col-lg-10">
         <?= Element::number('amount', $invoice['amount'], ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
       </div>
     </div>
+    <?php endif; ?>
 
     <?php if (!is_array($invoice)): ?>
     <div class="form-group">

@@ -68,7 +68,7 @@ final class InvoiceService
     {
         return $this->invoiceMapper->persist([
             'product' => $input['product'],
-            'amount' => $input['amount'],
+            'amount' => $input['amount'] ?? 0,
             'email' => $input['email'],
             'phone' => $input['phone'],
             'client' => $input['client'],

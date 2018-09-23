@@ -80,7 +80,7 @@ final class Invoice extends AbstractSiteController
 
             // Fill amount and product if provided
             $entity['product'] = $this->request->getQuery('product');
-            $entity['amount'] = $this->request->getQuery('amount');
+            $entity['amount'] = $this->request->getQuery('amount', false);
 
             return $this->view->render('invoice/form', [
                 'invoice' => $entity,
