@@ -112,7 +112,7 @@ final class Invoice extends AbstractSiteController
                 $body = $this->view->renderRaw('Site', 'mail', 'new', $data);
 
                 // Now send it
-                MailerService::send($_ENV['adminEmail'], 'Your have new invoice', $body);
+                MailerService::send($_ENV['adminEmail'], $this->translator->translate('Your have a new invoice'), $body);
 
                 $this->flashBag->set('success', 'Thanks! Your invoice has been sent');
                 return '1';
