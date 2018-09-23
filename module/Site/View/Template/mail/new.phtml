@@ -1,3 +1,3 @@
 
-<p>Hello there,</p>
-<p>You have received a new order from the site from <?= $client; ?>. Please check administration panel.</p>
+<p><?php $this->show('Hello there'); ?>,</p>
+<?= $this->translate('You have received a new order from the site from %s. Please check administration panel.', $client); ?>
