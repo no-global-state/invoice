@@ -66,10 +66,10 @@ use Site\Collection\StatusCollection;
             }
         ]
     ],
-    
+
     'actions' => [
         'notify' => function($row){
-            if ($row['status'] == 1) {
+            if ($row['status'] == 1 || !$row['amount']) {
                 return null;
             }
 
