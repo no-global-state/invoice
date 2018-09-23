@@ -105,17 +105,26 @@ final class Invoice extends AbstractSiteController
             ]);
 
             if ($formValidator->isValid()) {
-                // Add now
-                $this->getModuleService('invoiceService')->add($data);
-
                 // Create email body
                 $body = $this->view->renderRaw('Site', 'mail', 'new', $data);
 
                 // Now send it
                 MailerService::send($_ENV['adminEmail'], $this->translator->translate('Your have a new invoice'), $body);
 
-                $this->flashBag->set('success', 'Thanks! Your invoice has been sent');
-                return '1';
+                // Add now and get last token
+                $token = $this->getModuleService('invoiceService')->add($data);
+
+                // If amount not provided, then update
+                if (!isset($data['amount'])) {
+                    $this->flashBag->set('success', 'Thanks! Your invoice has been sent');
+                    return '1';
+                } else {
+                    // Otherwise redirect to payment page
+                    return $this->json([
+                        'url' => $this->request->getBaseUrl() . $this->createUrl('Site:Invoice@gatewayAction', [$token])
+                    ]);
+                }
+
             } else {
                 return $formValidator->getErrors();
             }
