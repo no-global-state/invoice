@@ -64,7 +64,8 @@ final class Invoice extends AbstractSiteController
     {
         if ($this->request->isGet()) {
             return $this->view->render('invoice/form', [
-                'invoice' => new VirtualEntity()
+                'invoice' => new VirtualEntity(),
+                'title' => 'New invoice'
             ]);
 
         } else {

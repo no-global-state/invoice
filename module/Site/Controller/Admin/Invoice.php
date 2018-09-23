@@ -61,12 +61,16 @@ final class Invoice extends AbstractAdminController
             $invoice = $invoiceService->findByToken($token);
 
             if ($invoice) {
+                // Shared title
+                $title = 'Edit invoice';
+
                 // Append breadcrumb
                 $this->view->getBreadcrumbBag()->addOne('Invoices', $this->createUrl('Site:Admin:Invoice@indexAction', [1]))
-                                               ->addOne('Edit invoice');
+                                               ->addOne($title);
 
                 return $this->view->render('invoice/form', [
-                    'invoice' => $invoice
+                    'invoice' => $invoice,
+                    'title' => $title
                 ]);
             } else {
                 // Invalid token provided
