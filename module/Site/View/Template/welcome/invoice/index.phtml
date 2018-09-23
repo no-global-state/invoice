@@ -14,6 +14,11 @@ use Site\Collection\StatusCollection;
     // A column to be considered as a primary key
     'pk' => 'id',
     'batch' => false,
+    'rowAttributes' => [
+        'class' => function($row){
+            return $row['status'] == StatusCollection::PARAM_STATUS_COMPLETE ? 'success' : 'warning';
+        }
+    ],
     'columns' => [
         [
             'column' => 'id',
