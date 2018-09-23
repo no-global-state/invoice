@@ -2,6 +2,7 @@
 
 use Krystal\Grid\Grid;
 use Krystal\Form\Element;
+use Site\Collection\StatusCollection;
 
 ?>
 
@@ -36,9 +37,13 @@ use Krystal\Form\Element;
         ],
 
         [
-            'column' => 'status'
+            'column' => 'status',
+            'translateable' => true,
+            'value' => function($row){
+                return (new StatusCollection)->findByKey($row['status']);
+            }
         ],
-        
+
         [
             'column' => 'datetime'
         ],
