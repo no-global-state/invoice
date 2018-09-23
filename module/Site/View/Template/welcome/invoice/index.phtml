@@ -56,6 +56,12 @@ use Site\Collection\StatusCollection;
         [
             'column' => 'amount',
             'value' => function($row) use ($currency){
+                // If has false-like value
+                if (!$row['amount']) {
+                    return '-';
+                }
+
+                // Otherwise return formatted value with currency
                 return number_format($row['amount'])  . PHP_EOL . $currency;
             }
         ]
