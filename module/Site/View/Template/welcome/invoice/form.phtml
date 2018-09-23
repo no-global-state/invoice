@@ -62,7 +62,9 @@ $asClient = !is_array($invoice);
             </div>
 
             <?php else: ?>
+            <?php if ($invoice['amount'] !== false): ?>
             <?= Element::hidden('amount', $invoice['amount']); ?>
+            <?php endif; ?>
             <?php endif; ?>
 
             <?php if ($asClient): ?>
