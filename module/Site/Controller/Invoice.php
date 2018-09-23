@@ -10,6 +10,19 @@ use Site\Gateway\GatewayService;
 final class Invoice extends AbstractSiteController
 {
     /**
+     * {@inheritDoc}
+     */
+    protected function bootstrap(string $action)
+    {
+        // Disabled CSRF for gateway action
+        if ($action === 'successAction') {
+            $this->enableCsrf = false;
+        }
+
+        parent::bootstrap($action);
+    }
+
+    /**
      * Handle success or failure after payment gets done
      * 
      * @param string $token
@@ -42,7 +55,7 @@ final class Invoice extends AbstractSiteController
 
         if ($invoice) {
             // Create back URL
-            $backUrl = $this->createUrl('Site:Invoice@successAction', [$token]);
+            $backUrl = $this->request->getBaseUrl() . $this->createUrl('Site:Invoice@successAction', [$token]);
             $gateway = GatewayService::factory($invoice['id'], $invoice['amount'], $backUrl);
 
             return $this->view->disableLayout()->render('gateway', [

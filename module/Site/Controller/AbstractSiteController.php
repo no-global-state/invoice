@@ -8,6 +8,13 @@ use Krystal\Validate\Renderer;
 abstract class AbstractSiteController extends AbstractController
 {
     /**
+     * Whether CSRF enabled
+     * 
+     * @var boolean
+     */
+    protected $enableCsrf = true;
+
+    /**
      * Returns shared authentication service for the site
      * 
      * @return \Site\Service\UserService
@@ -27,7 +34,7 @@ abstract class AbstractSiteController extends AbstractController
         // Validate CSRF token from POST requests
         if ($this->request->isPost()) {
             // Check the validity
-            if (!$this->csrfProtector->isValid($this->request->getMetaCsrfToken())) {
+            if ($this->enableCsrf === true && !$this->csrfProtector->isValid($this->request->getMetaCsrfToken())) {
                 $this->response->setStatusCode(400);
                 die('Invalid CSRF token');
             }
@@ -37,9 +44,10 @@ abstract class AbstractSiteController extends AbstractController
     /**
      * This method automatically gets called when this controller executes
      * 
+     * @param string $action
      * @return void
      */
-    protected function bootstrap()
+    protected function bootstrap(string $action)
     {
         // Validate the request on demand
         $this->validateRequest();
