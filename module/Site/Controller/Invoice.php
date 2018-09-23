@@ -76,6 +76,11 @@ final class Invoice extends AbstractSiteController
     public function newAction()
     {
         if ($this->request->isGet()) {
+            // If not logged in, then reset language to default
+            if (!$this->getAuthService()->isLoggedIn()) {
+                $this->loadTranslations('en');
+            }
+
             $entity = new VirtualEntity();
 
             // Fill amount and product if provided
