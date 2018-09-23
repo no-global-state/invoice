@@ -55,8 +55,8 @@ use Site\Collection\StatusCollection;
 
         [
             'column' => 'amount',
-            'value' => function($row){
-                return number_format($row['amount']);
+            'value' => function($row) use ($currency){
+                return number_format($row['amount'])  . PHP_EOL . $currency;
             }
         ]
     ],

@@ -28,7 +28,8 @@ final class Invoice extends AbstractAdminController
 
         return $this->view->render('invoice/index', [
             'invoices' => $invoiceService->fetchAll($page, $perPageCount),
-            'paginator' => $paginator
+            'paginator' => $paginator,
+            'currency' => '$'
         ]);
     }
 
