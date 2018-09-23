@@ -2,17 +2,32 @@
 
 use Krystal\Form\Element;
 
+$asClient = !is_array($invoice);
+
 ?>
 
 <div class="row">
     <div class="col-lg-6">
-        <h2 class="page-header"><?php $this->show($title); ?></h2>
+        <h2 class="page-header">
+            <?php $this->show($title); ?>
+
+            <?php if ($asClient): ?>
+            <small class="text-muted">(<?= $invoice['product']; ?>)</small>
+            <?php endif; ?>
+        </h2>
 
         <?php $this->loadPartial('breadcrumbs'); ?>
         <?php $this->loadPartial('flash'); ?>
         <form class="form-horizontal">
           <?= Element::hidden('id', $invoice['id']); ?>
           <fieldset>
+            <div class="form-group">
+              <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Your name'); ?></label>
+              <div class="col-lg-10">
+                <?= Element::text('client', $invoice['client'], ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Type your name')]); ?>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="inputEmail" class="col-lg-2 control-label"><?php $this->show('Email'); ?></label>
               <div class="col-lg-10">
@@ -27,30 +42,30 @@ use Krystal\Form\Element;
               </div>
             </div>
             
-            <div class="form-group">
-              <label for="inputName" class="col-lg-2 control-label"><?php $this->show('Your name'); ?></label>
-              <div class="col-lg-10">
-                <?= Element::text('client', $invoice['client'], ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => $this->translate('Type your name')]); ?>
-              </div>
-            </div>
-            
+            <?php if (!$asClient): ?>
             <div class="form-group">
               <label for="inputProduct" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
               <div class="col-lg-10">
                 <?= Element::text('product', $invoice['product'], ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
               </div>
             </div>
+            <?php else: ?>
+            <?= Element::hidden('product', $invoice['product']); ?>
+            <?php endif; ?>
 
-            <?php if ($invoice['amount'] !== false): ?>
+            <?php if (!$asClient): ?>
             <div class="form-group">
               <label for="inputAmount" class="col-lg-2 control-label"><?php $this->show('Amount'); ?></label>
               <div class="col-lg-10">
                 <?= Element::number('amount', $invoice['amount'], ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
               </div>
             </div>
+
+            <?php else: ?>
+            <?= Element::hidden('amount', $invoice['amount']); ?>
             <?php endif; ?>
 
-            <?php if (!is_array($invoice)): ?>
+            <?php if ($asClient): ?>
             <div class="form-group">
                 <label for="inputCaptcha" class="col-lg-2 control-label"></label>
                 <div class="col-lg-10">
