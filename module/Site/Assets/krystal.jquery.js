@@ -136,6 +136,11 @@ $(function(){
             // Clear all previous messages and added classes
             this.resetAll();
 
+            // Response URL
+            if (response.url) {
+                window.location = response.url;
+            }
+
             // if its not JSON, but "1" then we'd assume success
             if (response == "1") {
                 // Since we might have a flash messenger, we'd simply reload current page
