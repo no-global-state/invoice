@@ -17,7 +17,7 @@ return [
         'controller' => 'Auth@logoutAction'
     ],
     
-    '/invoices/new' => [
+    '/invoices/new/(:var)' => [
         'controller' => 'Invoice@newAction'
     ],
     

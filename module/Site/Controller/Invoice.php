@@ -63,8 +63,14 @@ final class Invoice extends AbstractSiteController
     public function newAction()
     {
         if ($this->request->isGet()) {
+            $entity = new VirtualEntity();
+
+            // Fill amount and product if provided
+            $entity['product'] = $this->request->getQuery('product');
+            $entity['amount'] = $this->request->getQuery('amount');
+
             return $this->view->render('invoice/form', [
-                'invoice' => new VirtualEntity(),
+                'invoice' => $entity,
                 'title' => 'New invoice'
             ]);
 
