@@ -59,23 +59,30 @@ final class InvoiceService
     }
 
     /**
-     * Adds new invoice
+     * Adds new invoice and returns its token
      * 
      * @param array $input
-     * @return boolean
+     * @return mixed
      */
-    public function add(array $input) : bool
+    public function add(array $input) : string
     {
-        return $this->invoiceMapper->persist([
+        // Generate unique token
+        $token = TextUtils::uniqueString();
+
+        $data = [
             'product' => $input['product'],
             'amount' => $input['amount'] ?? 0,
             'email' => $input['email'],
             'phone' => $input['phone'],
             'client' => $input['client'],
             'status' => -1,
-            'token' => TextUtils::uniqueString(),
+            'token' => $token,
             'datetime' => TimeHelper::getNow()
-        ]);
+        ];
+
+        $this->invoiceMapper->persist($data);
+
+        return $token;
     }
 
     /**
