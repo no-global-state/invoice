@@ -51,18 +51,13 @@ use Krystal\Form\Element;
             <?= Element::hidden('product', $invoice['product']); ?>
             <?php endif; ?>
 
-            <?php if (!$asClient): ?>
+            <?php if (($asClient && $invoice['amount'] !== false) || !$asClient): ?>
             <div class="form-group">
               <label for="inputAmount" class="col-lg-2 control-label"><?php $this->show('Amount'); ?></label>
               <div class="col-lg-10">
-                <?= Element::number('amount', $invoice['amount'], ['class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
+                <?= Element::number('amount', $invoice['amount'], ['readonly' => $asClient, 'class' => 'form-control', 'min' => 1, 'id' => 'inputAmount', 'placeholder' => $this->translate('Amount to be charged')]); ?>
               </div>
             </div>
-
-            <?php else: ?>
-            <?php if ($invoice['amount'] !== false): ?>
-            <?= Element::hidden('amount', $invoice['amount']); ?>
-            <?php endif; ?>
             <?php endif; ?>
 
             <?php if ($asClient): ?>
