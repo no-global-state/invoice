@@ -8,6 +8,10 @@ use Site\Collection\StatusCollection;
 
 <h2 class="page-header"><i class="glyphicon glyphicon-list-alt"></i> <?php $this->show('Invoices'); ?></h2>
 
+<p>
+    <a class="btn btn-primary" href="<?= $this->url('Site:Admin:Invoice@addAction'); ?>"><i class="glyphicon glyphicon-pencil"></i> <?php $this->show('Create invoice'); ?></a>
+</p>
+
 <?php $this->loadPartial('flash'); ?>
 
 <?= Grid::render($invoices, [
