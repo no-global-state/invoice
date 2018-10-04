@@ -40,16 +40,12 @@ use Krystal\Form\Element;
               </div>
             </div>
             
-            <?php if (!$asClient): ?>
             <div class="form-group">
               <label for="inputProduct" class="col-lg-2 control-label"><?php $this->show('Product'); ?></label>
               <div class="col-lg-10">
-                <?= Element::text('product', $invoice['product'], ['class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
+                <?= Element::textarea('product', $invoice['product'], ['readonly' => $asClient, 'class' => 'form-control', 'id' => 'inputProduct', 'placeholder' => $this->translate('Product name')]); ?>
               </div>
             </div>
-            <?php else: ?>
-            <?= Element::hidden('product', $invoice['product']); ?>
-            <?php endif; ?>
 
             <?php if (($asClient && $invoice['amount'] !== false) || !$asClient): ?>
             <div class="form-group">
