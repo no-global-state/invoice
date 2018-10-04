@@ -29,12 +29,16 @@ return [
         'controller' => 'Invoice@successAction'
     ],
     
-    '/admin/invoices/(:var)' => [
+    '/admin/invoices/index/(:var)' => [
         'controller' => 'Admin:Invoice@indexAction'
     ],
     
     '/admin/invoices/notify/(:var)' => [
         'controller' => 'Admin:Invoice@notifyAction'
+    ],
+    
+    '/admin/invoices/add' => [
+        'controller' => 'Admin:Invoice@addAction'
     ],
     
     '/admin/invoices/edit/(:var)' => [

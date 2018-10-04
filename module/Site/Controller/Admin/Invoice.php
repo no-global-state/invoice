@@ -3,6 +3,7 @@
 namespace Site\Controller\Admin;
 
 use Site\Service\MailerService;
+use Krystal\Stdlib\VirtualEntity;
 
 final class Invoice extends AbstractAdminController
 {
@@ -48,6 +49,49 @@ final class Invoice extends AbstractAdminController
     }
 
     /**
+     * Creates invoice form
+     * 
+     * @param string $title
+     * @param mixed $invoice
+     * @return string
+     */
+    private function createForm(string $title, $invoice)
+    {
+        // Append breadcrumb
+        $this->view->getBreadcrumbBag()->addOne('Invoices', $this->createUrl('Site:Admin:Invoice@indexAction', [1]))
+                                       ->addOne($title);
+
+        return $this->view->render('invoice/form', [
+            'invoice' => $invoice,
+            'title' => $title,
+            'asClient' => false
+        ]);
+    }
+
+    /**
+     * Renders empty form
+     * 
+     * @return string
+     */
+    public function addAction()
+    {
+        $title = 'Create invoice';
+
+        if ($this->request->isGet()) {
+            return $this->createForm($title, new VirtualEntity());
+        } else {
+            // Grab the service
+            $invoiceService = $this->getModuleService('invoiceService');
+
+            // Update request
+            $invoiceService->add($this->request->getPost());
+
+            $this->flashBag->set('success', 'Invoice has been created successfully');
+            return 1;
+        }
+    }
+
+    /**
      * Renders edit form
      * 
      * @param string $token
@@ -65,14 +109,7 @@ final class Invoice extends AbstractAdminController
                 // Shared title
                 $title = 'Edit invoice';
 
-                // Append breadcrumb
-                $this->view->getBreadcrumbBag()->addOne('Invoices', $this->createUrl('Site:Admin:Invoice@indexAction', [1]))
-                                               ->addOne($title);
-
-                return $this->view->render('invoice/form', [
-                    'invoice' => $invoice,
-                    'title' => $title
-                ]);
+                return $this->createForm($title, $invoice);
             } else {
                 // Invalid token provided
                 return false;

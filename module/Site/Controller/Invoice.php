@@ -89,7 +89,8 @@ final class Invoice extends AbstractSiteController
 
             return $this->view->render('invoice/form', [
                 'invoice' => $entity,
-                'title' => 'New invoice'
+                'title' => 'New invoice',
+                'asClient' => true
             ]);
 
         } else {
